@@ -1,2 +1,7 @@
 const $canvas = document.getElementById("canvas");
-const context = $canvas.getContext();
+
+window.onload = () => {
+  const game = new Game($canvas);
+
+  game.playing();
+};
