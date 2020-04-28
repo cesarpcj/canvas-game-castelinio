@@ -26,7 +26,7 @@ class CharacterSelectionManager {
         this.context.fillRect(slot.x, slot.y, 50, 50);
       }
     }
-    this.slotAlpha += 0.5;
+    this.slotAlpha += 0.1;
     this.context.restore();
   }
 }

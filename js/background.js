@@ -3,7 +3,7 @@ class Background {
     this.game = game;
     this.context = game.context;
     this.img = new Image();
-    this.img.src = "./images/background_02.png";
+    this.img.src = "./images/background_03.png";
     this.img.onload = () => {
       this.context.drawImage(this.img, 0, 0);
     };
