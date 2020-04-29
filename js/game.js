@@ -7,10 +7,12 @@ class Game {
     this.csm = new CharacterSelectionManager(this);
     this.heros = [];
     this.enemies = [];
-    this.state = "playing"; // pre-game ,playing , game-over, paused
+    this.wave = 1;
+    this.state = "pre game"; // pre game ,playing , game over, paused
     this.pause_btn = new Button(this, 940, 15, 40, 40);
     this.upgradeCastle_btn = new Button(this, 248, 490, 65, 65);
     this.addArcher_btn = new Button(this, 370, 490, 65, 65);
+    this.play_btn = new Button(this, 400, 280, 220, 70);
 
     this.createWave();
     this.bindButtons();
@@ -18,7 +20,7 @@ class Game {
 
   createWave() {
     for (let i = 0; i < 10; i++) {
-      this.enemies.push(new Barbarian(this, 1000 + i * Math.random() * 200, 200 + Math.random() * 150));
+      this.enemies.push(new Barbarian(this, 1000 + i * Math.random() * 100, 190 + Math.random() * 150));
     }
   }
 
@@ -30,13 +32,36 @@ class Game {
     this.upgradeCastle_btn.draw();
     this.addArcher_btn.draw();
 
+    //this.context.save();
+    this.context.font = "bold 20px Times New Roman";
+    this.context.fillStyle = "White";
+    this.context.fillText(`Wave: ${this.wave}`, 490, 20);
+    //this.context.restore();
+
     if (this.csm.selected) {
       this.csm.drawSlots();
     }
   }
 
+  drawPreGame() {
+    this.context.clearRect(0, 0, this.$canvas.width, this.$canvas.height);
+    this.bg.drawPreGame();
+    this.play_btn.draw();
+  }
+
+  drawGameOver() {
+    this.context.clearRect(0, 0, this.$canvas.width, this.$canvas.height);
+    this.bg.draw();
+    this.castle.draw();
+    this.context.font = "bold 80px Times New Roman";
+    this.context.fillStyle = "White";
+    this.context.fillText("Game Over", this.$canvas.width / 2 - 200, this.$canvas.height / 2 - 100);
+    this.context.font = "bold 30px Times New Roman";
+    this.context.fillText(`You died at wave ${this.wave}`, 460, this.$canvas.height / 2 - 60);
+  }
+
   pause() {
-    console.log("paused");
+    console.log("pausou");
     this.state = "paused";
   }
 
@@ -48,6 +73,7 @@ class Game {
 
   playing() {
     this.drawGame();
+
     for (let unit of this.heros) {
       unit.update();
     }
@@ -58,12 +84,19 @@ class Game {
       unit.update();
     }
 
-    if (this.state === "playing") {
-      setTimeout(() => {
-        this.playing();
-      }, 1000 / 120);
+    if (this.castle.health <= 0) {
+      console.log("game over");
+      this.state = "game over";
     }
   }
+
+  // preGame() {
+  //   this.drawPreGame();
+  // }
+
+  // gameOver() {
+  //   this.drawGameOver();
+  // }
 
   bindButtons() {
     window.addEventListener("click", (event) => {
@@ -78,6 +111,8 @@ class Game {
         }
       }
 
+      if (this.isButtonPressed(event, this.play_btn) && this.state === "pre game") this.play();
+
       if (this.isButtonPressed(event, this.upgradeCastle_btn)) this.castle.upgrade();
 
       if (this.isButtonPressed(event, this.addArcher_btn)) {
@@ -85,7 +120,8 @@ class Game {
       }
 
       if (this.csm.selected) {
-        for (let slot of this.csm.slots) {
+        const availableSlot = this.csm.slots.filter((slot) => slot.isEmpty);
+        for (let slot of availableSlot) {
           if (this.isButtonPressed(event, slot)) {
             let newUnit;
             switch (this.csm.selected) {

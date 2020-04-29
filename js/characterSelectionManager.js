@@ -8,12 +8,12 @@ class CharacterSelectionManager {
       { id: 0, isEmpty: true, x: 415, y: 260, w: 50, h: 50 },
       { id: 1, isEmpty: true, x: 338, y: 260, w: 50, h: 50 },
       { id: 2, isEmpty: true, x: 261, y: 260, w: 50, h: 50 },
-      { id: 3, isEmpty: true, x: 415, y: 190, w: 50, h: 50 },
-      { id: 4, isEmpty: true, x: 338, y: 190, w: 50, h: 50 },
-      { id: 5, isEmpty: true, x: 261, y: 190, w: 50, h: 50 },
-      { id: 6, isEmpty: true, x: 415, y: 120, w: 50, h: 50 },
-      { id: 7, isEmpty: true, x: 338, y: 120, w: 50, h: 50 },
-      { id: 8, isEmpty: true, x: 261, y: 120, w: 50, h: 50 },
+      { id: 3, isEmpty: false, x: 415, y: 190, w: 50, h: 50 },
+      { id: 5, isEmpty: false, x: 261, y: 190, w: 50, h: 50 },
+      { id: 4, isEmpty: false, x: 338, y: 190, w: 50, h: 50 },
+      { id: 6, isEmpty: false, x: 415, y: 120, w: 50, h: 50 },
+      { id: 8, isEmpty: false, x: 261, y: 120, w: 50, h: 50 },
+      { id: 7, isEmpty: false, x: 338, y: 120, w: 50, h: 50 },
     ];
   }
 
@@ -26,7 +26,7 @@ class CharacterSelectionManager {
         this.context.fillRect(slot.x, slot.y, 50, 50);
       }
     }
-    this.slotAlpha += 0.1;
+    this.slotAlpha += 0.05;
     this.context.restore();
   }
 }

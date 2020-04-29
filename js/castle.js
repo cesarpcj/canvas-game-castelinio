@@ -23,24 +23,23 @@ class Castle {
     this.healthImg.src = "./images/health_bar.png";
 
     this.imgs = [this.img1, this.img2, this.img3, this.img4, this.img5, this.img6, this.img7];
-
-    this.img1.onload = () => {
-      this.draw();
-    };
   }
 
   draw() {
     let healthBarSize = (170 * this.health) / this.maxHealth;
+    let clipX = (380 * this.health) / this.maxHealth;
     if (healthBarSize < 0) healthBarSize = 0;
     this.context.drawImage(this.imgs[this.level], 250, 70, 225, 315);
-    this.context.drawImage(this.healthImg, 45, 0, healthBarSize, 40);
+    //this.context.drawImage(this.healthImg, 45, 0, healthBarSize, 40);
+    this.context.drawImage(this.healthImg, 0, 0, clipX, 100, 45, 0, healthBarSize, 40);
   }
 
   upgrade() {
     if (this.level < 6) {
       this.level += 1;
-      this.maxHealth += 100;
+      this.maxHealth += 50;
       this.health += 50;
+      this.game.csm.slots[this.level + 2].isEmpty = true;
     }
   }
 }
