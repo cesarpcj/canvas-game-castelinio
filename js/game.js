@@ -8,9 +8,10 @@ class Game {
     this.heros = [];
     this.enemies = [];
     this.wave = 1;
-    this.food = 50;
-    this.stone = 50;
-    this.wood = 50;
+    this.resource = new Resources(this);
+    //this.food = 50; //******* */
+    //this.stone = 50; //******* */
+    //this.wood = 50; //******* */
     this.state = "pre game"; // pre game ,playing , game over, paused
     this.pause_btn = new Button(this, 940, 15, 40, 40);
     this.upgradeCastle_btn = new Button(this, 248, 490, 65, 65);
@@ -32,6 +33,17 @@ class Game {
       this.enemies.push(new Greek(this, 1200 + i * rnd, 190 + Math.random() * 150));
       this.enemies.push(new Knight(this, 1400 + i * rnd * 3, 190 + Math.random() * 150));
     }
+
+    for (let i = 0; i < 5; i++) {
+      const rnd = 40 + Math.random() * 10;
+      this.enemies.push(new Knight(this, 2100 + i * rnd * 3, 190 + Math.random() * 150));
+    }
+
+    for (let i = 0; i < 3; i++) {
+      const rnd = 40 + Math.random() * 10;
+      this.enemies.push(new Greek(this, 2100 + i * rnd, 190 + Math.random() * 150));
+      this.enemies.push(new Knight(this, 2100 + i * rnd * 3, 190 + Math.random() * 150));
+    }
   }
 
   drawGame() {
@@ -46,9 +58,10 @@ class Game {
     this.context.font = "bold 20px Times New Roman";
     this.context.fillStyle = "White";
     this.context.fillText(`Wave: ${this.wave}`, 490, 20);
-    this.context.fillText(`${this.stone}`, 260, 25);
-    this.context.fillText(`${this.wood}`, 340, 25);
-    this.context.fillText(`${this.food}`, 415, 25);
+    this.resource.draw();
+    //this.context.fillText(`${this.stone}`, 260, 25); //******* */
+    //this.context.fillText(`${this.wood}`, 340, 25); //******* */
+    //this.context.fillText(`${this.food}`, 415, 25); //******* */
     //this.context.restore();
 
     if (this.csm.selected) {
@@ -129,7 +142,13 @@ class Game {
       if (this.isButtonPressed(event, this.upgradeCastle_btn)) this.castle.upgrade();
 
       if (this.isButtonPressed(event, this.addArcher_btn)) {
-        this.csm.selected = "Archer";
+        if (this.resource.food >= 25 && this.resource.wood >= 10) {
+          ///////**** */
+
+          this.csm.selected = "Archer";
+        }
+
+        //this.csm.selected = "Archer";
       }
 
       if (this.csm.selected) {

@@ -6,9 +6,12 @@ class Archer extends Character {
     this.strength = 5;
     this.arrow = "";
     this.target = "";
+    this.cost = { food: 25, stone: 0, wood: 10 };
 
     this.img = new Image();
     this.img.src = "./images/archer.png";
+    this.game.resource.food -= this.cost.food; //******* */
+    this.game.resource.wood -= this.cost.wood; //******* */
     this.img.onload = () => {
       this.draw();
     };
