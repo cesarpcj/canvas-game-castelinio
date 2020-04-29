@@ -8,6 +8,9 @@ class Game {
     this.heros = [];
     this.enemies = [];
     this.wave = 1;
+    this.food = 50;
+    this.stone = 50;
+    this.wood = 50;
     this.state = "pre game"; // pre game ,playing , game over, paused
     this.pause_btn = new Button(this, 940, 15, 40, 40);
     this.upgradeCastle_btn = new Button(this, 248, 490, 65, 65);
@@ -19,8 +22,15 @@ class Game {
   }
 
   createWave() {
-    for (let i = 0; i < 10; i++) {
-      this.enemies.push(new Barbarian(this, 1000 + i * Math.random() * 100, 190 + Math.random() * 150));
+    for (let i = 0; i < 5; i++) {
+      const rnd = 40 + Math.random() * 10;
+      this.enemies.push(new Barbarian(this, 1000 + i * rnd * 2, 190 + Math.random() * 150));
+    }
+
+    for (let i = 0; i < 3; i++) {
+      const rnd = 40 + Math.random() * 10;
+      this.enemies.push(new Greek(this, 1200 + i * rnd, 190 + Math.random() * 150));
+      this.enemies.push(new Knight(this, 1400 + i * rnd * 3, 190 + Math.random() * 150));
     }
   }
 
@@ -36,6 +46,9 @@ class Game {
     this.context.font = "bold 20px Times New Roman";
     this.context.fillStyle = "White";
     this.context.fillText(`Wave: ${this.wave}`, 490, 20);
+    this.context.fillText(`${this.stone}`, 260, 25);
+    this.context.fillText(`${this.wood}`, 340, 25);
+    this.context.fillText(`${this.food}`, 415, 25);
     //this.context.restore();
 
     if (this.csm.selected) {
@@ -129,7 +142,14 @@ class Game {
                 newUnit = new Archer(this, slot.x, slot.y);
             }
 
-            this.heros.push(newUnit);
+            const indexToRemove = this.heros.findIndex((hero, index, arr) => hero.x === slot.x && hero.y === slot.y);
+            console.log(indexToRemove);
+            if (indexToRemove >= 0) {
+              this.heros.splice(indexToRemove, 1, newUnit);
+            } else {
+              this.heros.push(newUnit);
+            }
+
             this.csm.selected = "";
           }
         }

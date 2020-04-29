@@ -1,8 +1,9 @@
 class Barbarian extends Character {
   constructor(game, x, y) {
-    super(game, x, y, 70, 70, 20);
+    super(game, x, y, 70, 70);
     this.isAlive = true;
-    this.speed = 0.2;
+    this.speed = 0.23;
+    this.health = 20;
     this.strength = 10;
     this.img = new Image();
     this.img.src = "./images/Barbarian_Walking_000.png";

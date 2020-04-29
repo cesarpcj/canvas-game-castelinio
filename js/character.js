@@ -17,6 +17,6 @@ class Character {
 
   receiveDamage(damage) {
     this.health -= damage;
-    console.log("health is: ", this.health);
+    //console.log("health is: ", this.health);
   }
 }
