@@ -5,7 +5,7 @@ class Castle {
     this.level = 0;
     this.maxHealth = 100;
     this.health = 100;
-    this.upgradeCost = { stone: 35, wood: 20 };
+    this.upgradeCost = { stone: 8, wood: 5 };
     this.img1 = new Image();
     this.img1.src = "./images/castle/Castle_00.png";
     this.img2 = new Image();
@@ -45,10 +45,10 @@ class Castle {
       this.maxHealth += 50;
       this.health += 50;
       this.game.csm.slots[this.level + 2].isEmpty = true;
-      this.game.resource.stone -= this.upgradeCost.stone; //******* */
+      this.game.resource.stone -= this.upgradeCost.stone; //******* */removeStone();
       this.game.resource.wood -= this.upgradeCost.wood; //******* */
-      this.upgradeCost.stone += 10;
-      this.upgradeCost.wood += 10;
+      this.upgradeCost.stone += this.level * this.level;
+      this.upgradeCost.wood += this.level * this.level;
     }
   }
 }

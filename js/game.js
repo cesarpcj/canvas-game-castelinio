@@ -13,10 +13,10 @@ class Game {
     //this.stone = 50; //******* */
     //this.wood = 50; //******* */
     this.state = "pre game"; // pre game ,playing , game over, paused
-    this.pause_btn = new Button(this, 940, 15, 40, 40);
-    this.upgradeCastle_btn = new Button(this, 248, 490, 65, 65);
-    this.addArcher_btn = new Button(this, 370, 490, 65, 65);
-    this.play_btn = new Button(this, 400, 280, 220, 70);
+    this.pause_btn = new Button(this, 940, 5, 40, 40);
+    this.upgradeCastle_btn = new Button(this, 460, 525, 80, 20);
+    this.addArcher_btn = new Button(this, 595, 525, 80, 20);
+    this.play_btn = new Button(this, 400, 280, 220, 80);
 
     this.createWave();
     this.bindButtons();
@@ -30,19 +30,19 @@ class Game {
 
     for (let i = 0; i < 3; i++) {
       const rnd = 40 + Math.random() * 10;
-      this.enemies.push(new Greek(this, 1200 + i * rnd, 190 + Math.random() * 150));
-      this.enemies.push(new Knight(this, 1400 + i * rnd * 3, 190 + Math.random() * 150));
+      this.enemies.push(new Greek(this, 1300 + i * rnd, 190 + Math.random() * 150));
+      this.enemies.push(new Knight(this, 1500 + i * rnd * 3, 190 + Math.random() * 150));
     }
 
     for (let i = 0; i < 5; i++) {
       const rnd = 40 + Math.random() * 10;
-      this.enemies.push(new Knight(this, 2100 + i * rnd * 3, 190 + Math.random() * 150));
+      this.enemies.push(new Knight(this, 2300 + i * rnd * 3, 190 + Math.random() * 150));
     }
 
     for (let i = 0; i < 3; i++) {
       const rnd = 40 + Math.random() * 10;
-      this.enemies.push(new Greek(this, 2100 + i * rnd, 190 + Math.random() * 150));
-      this.enemies.push(new Knight(this, 2100 + i * rnd * 3, 190 + Math.random() * 150));
+      this.enemies.push(new Greek(this, 2300 + i * rnd, 190 + Math.random() * 150));
+      this.enemies.push(new Knight(this, 2300 + i * rnd * 3, 190 + Math.random() * 150));
     }
   }
 
@@ -99,6 +99,7 @@ class Game {
 
   playing() {
     this.drawGame();
+    this.resource.generateResources();
 
     for (let unit of this.heros) {
       unit.update();
@@ -142,7 +143,7 @@ class Game {
       if (this.isButtonPressed(event, this.upgradeCastle_btn)) this.castle.upgrade();
 
       if (this.isButtonPressed(event, this.addArcher_btn)) {
-        if (this.resource.food >= 25 && this.resource.wood >= 10) {
+        if (this.resource.food >= 6 && this.resource.wood >= 2) {
           ///////**** */
 
           this.csm.selected = "Archer";

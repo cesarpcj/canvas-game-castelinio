@@ -18,9 +18,9 @@ class Arrow extends Projetil {
 
   draw() {
     let aux2;
-    if (this.distance < 60) {
-      aux2 = 5;
-      this.x += 1.5;
+    if (this.distance < 40) {
+      aux2 = 4;
+      this.x += 1.2;
     } else if (this.distance < 120) {
       aux2 = 1;
       this.x += 2.5;
