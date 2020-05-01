@@ -167,6 +167,7 @@ class Game {
     }
 
     if (this.castle.health <= 0) {
+      this.castle.health = 0;
       console.log("game over");
       this.state = "game over";
     }
