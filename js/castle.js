@@ -33,6 +33,10 @@ class Castle {
     this.context.drawImage(this.imgs[this.level], 250, 70, 225, 315);
     //this.context.drawImage(this.healthImg, 45, 0, healthBarSize, 40);
     this.context.drawImage(this.healthImg, 0, 0, clipX, 100, 45, 0, healthBarSize, 40);
+
+    this.context.font = "bold 18px Times New Roman";
+    this.context.fillStyle = "white";
+    this.context.fillText(`${this.health}/ ${this.maxHealth}`, 100, 26);
   }
 
   upgrade() {
@@ -45,10 +49,17 @@ class Castle {
       this.maxHealth += 50;
       this.health += 50;
       this.game.csm.slots[this.level + 2].isEmpty = true;
-      this.game.resource.stone -= this.upgradeCost.stone; //******* */removeStone();
-      this.game.resource.wood -= this.upgradeCost.wood; //******* */
+      this.game.resource.stone -= this.upgradeCost.stone;
+      this.game.resource.wood -= this.upgradeCost.wood;
       this.upgradeCost.stone += this.level * this.level;
       this.upgradeCost.wood += this.level * this.level;
     }
+  }
+
+  reset() {
+    this.level = 0;
+    this.maxHealth = 100;
+    this.health = 100;
+    this.upgradeCost = { stone: 8, wood: 5 };
   }
 }

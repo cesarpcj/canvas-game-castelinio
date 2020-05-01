@@ -13,7 +13,6 @@ class Barbarian extends Character {
   }
 
   move() {
-    //console.log("moving");
     this.x = this.x - this.speed;
   }
 

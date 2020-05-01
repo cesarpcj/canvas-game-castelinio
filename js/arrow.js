@@ -34,40 +34,9 @@ class Arrow extends Projetil {
       aux2 = 0.3;
       this.x += 3.5;
     }
-    const aux = (5 - this.distance / 150) * 0.6 + aux2; //5.5
+    const aux = (5 - this.distance / 150) * 0.6 + aux2;
 
-    this.y = this.y + this.posY * aux; //4]
-    //console.log(this.distance);
-    /*
-    console.log(this.aux);
-    
-
-    this.angle += 0.3;
-
-    if (this.isGoingUp) {
-      //console.log(this.x, " menor q ", this.middleWayX);
-      //console.log(this.y, this.topY);
-      if (this.x < this.middleWayX) {
-        //console.log("y mais ");
-        //this.angularSpeed -= this.acc;
-        this.angularSpeed -= this.acc - this.aux * 3;
-        if (this.angularSpeed < 0) {
-          this.angularSpeed = 0;
-          this.isGoingUp = false;
-        }
-        //console.log(this.angularSpeed);
-        this.y -= this.angularSpeed;
-      } else {
-        this.angularSpeed = 0.1;
-        this.isGoingUp = false;
-      }
-    } else {
-      //console.log(this.angularSpeed);
-      this.angularSpeed += this.acc;
-      //this.angularSpeed += this.acc + this.aux * 2;
-      this.y += this.angularSpeed;
-    }
-    */
+    this.y = this.y + this.posY * aux;
 
     this.context.save();
 

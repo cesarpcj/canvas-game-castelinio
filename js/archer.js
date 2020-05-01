@@ -10,7 +10,7 @@ class Archer extends Character {
 
     this.img = new Image();
     this.img.src = "./images/archer.png";
-    this.game.resource.food -= this.cost.food; //remove
+    this.game.resource.food -= this.cost.food;
     this.game.resource.wood -= this.cost.wood;
     this.img.onload = () => {
       this.draw();

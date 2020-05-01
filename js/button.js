@@ -10,7 +10,7 @@ class Button {
 
   draw() {
     this.context.save();
-    //this.globalAlpha = 0;
+
     this.context.fillStyle = "rgba(111,111,111,0.5)";
     this.context.fillRect(this.x, this.y, this.w, this.h);
     this.context.restore();

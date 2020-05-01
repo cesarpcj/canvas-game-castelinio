@@ -49,11 +49,6 @@ class Resources {
   draw() {
     this.drawOwenedResources();
     this.drawSettlersAndPickup();
-
-    this.upgradeFood_btn.draw();
-    this.upgradeStone_btn.draw();
-    this.upgradeWood_btn.draw();
-
     this.drawText();
   }
 
@@ -148,7 +143,7 @@ class Resources {
     if (!this.hasWoodToGather) {
       this.woodTime += 1 / 120;
 
-      if (this.woodTime >= 6) {
+      if (this.woodTime >= 5.5) {
         this.woodTime = 0;
         this.hasWoodToGather = true;
       }
@@ -159,7 +154,7 @@ class Resources {
     if (!this.hasStoneToGather) {
       this.stoneTime += 1 / 120;
 
-      if (this.stoneTime >= 7) {
+      if (this.stoneTime >= 6) {
         this.stoneTime = 0;
         this.hasStoneToGather = true;
       }
@@ -211,8 +206,9 @@ class Resources {
         this.removeFood(this.upgradeWoodCost.food);
         this.removeStone(this.upgradeWoodCost.stone);
         this.removeWood(this.upgradeWoodCost.wood);
-        this.woodProductionRate += this.woodSiteLevel;
+
         this.woodSiteLevel++;
+        this.woodProductionRate += this.woodSiteLevel;
 
         this.upgradeWoodCost = {
           stone: 5,
@@ -230,15 +226,37 @@ class Resources {
         this.removeFood(this.upgradeStoneCost.food);
         this.removeStone(this.upgradeStoneCost.stone);
         this.removeWood(this.upgradeStoneCost.wood);
-        this.stoneProductionRate += this.stoneSiteLevel;
+
         this.stoneSiteLevel++;
+        this.stoneProductionRate += this.stoneSiteLevel;
 
         this.upgradeStoneCost = {
-          stone: 7,
-          wood: 7,
+          stone: 6,
+          wood: 6,
           food: 8,
         };
       }
     });
+  }
+
+  reset() {
+    this.wood = 10;
+    this.stone = 10;
+    this.food = 10;
+    this.woodProductionRate = 1;
+    this.stoneProductionRate = 1;
+    this.foodProductionRate = 2;
+    this.foodSiteLevel = 1;
+    this.woodSiteLevel = 1;
+    this.stoneSiteLevel = 1;
+    this.hasFoodToGather = false;
+    this.hasWoodToGather = false;
+    this.hasStoneToGather = false;
+    this.foodTime = 0;
+    this.woodTime = 0;
+    this.stoneTime = 0;
+    this.upgradeFoodCost = { stone: 1, wood: 3, food: 4 };
+    this.upgradeWoodCost = { stone: 3, wood: 1, food: 6 };
+    this.upgradeStoneCost = { stone: 2, wood: 3, food: 6 };
   }
 }

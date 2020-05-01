@@ -1,3 +1,14 @@
 body {
   margin: 0;
+  background-color: rgb(153, 161, 66);
+}
+
+.instruction {
+  object-fit: fill;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }

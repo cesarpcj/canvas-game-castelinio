@@ -1,7 +1,7 @@
 class Knight extends Barbarian {
   constructor(game, x, y) {
     super(game, x, y);
-    this.speed = 0.18;
+    this.speed = 0.17;
     this.strength = 30;
     this.health = 30;
     this.img = new Image();
